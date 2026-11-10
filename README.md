@@ -18,41 +18,7 @@
 
 ## 2. 아키텍처
 
-```mermaid
-flowchart LR
-    PDF[/"통계 보도자료 PDF<br/>14쪽"/]
-
-    subgraph S1["① 문서 파싱 · src/extract.py"]
-        P["partition_pdf<br/>hi_res · by_title"]
-        P --> T["텍스트 11블록<br/>→ 2,000토큰 청크 3개"]
-        P --> TB["표 10개"]
-        P --> IMG["그래프·로고 22장<br/>figures/*.jpg"]
-    end
-
-    subgraph S2["② 요약 · 저장 · 검색 · src/summarize.py, src/retriever.py"]
-        T --> LLM["gpt-4o-mini<br/>텍스트·표 요약"]
-        TB --> LLM
-        IMG --> VLM["gpt-4o-mini (비전)<br/>이미지 요약"]
-        LLM --> VS[("Chroma 벡터 DB<br/>요약 임베딩")]
-        VLM --> VS
-        T --> DS[("InMemoryStore<br/>원본 텍스트·표·Base64 이미지")]
-        TB --> DS
-        IMG --> DS
-        VS -. "같은 doc_id" .- DS
-    end
-
-    subgraph S3["③ 답변 생성 · src/retriever.py"]
-        Q(["질문"]) --> R["MultiVectorRetriever<br/>요약으로 검색 → doc_id로 원본 반환"]
-        R --> SP["split_image_text_types<br/>이미지 / 텍스트 분리"]
-        SP --> PR["img_prompt_func<br/>이미지 먼저 + 텍스트 + 질문"]
-        PR --> M["gpt-4o-mini (비전)"]
-        M --> A(["한국어 답변"])
-    end
-
-    PDF --> P
-    VS --> R
-    DS --> R
-```
+![아키텍처](docs/images/architecture.png)
 
 ### 왜 요약으로 검색하고, 원본으로 답하는가
 
