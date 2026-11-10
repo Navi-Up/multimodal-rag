@@ -1,0 +1,31 @@
+# 가상환경
+.venv/
+
+# 환경변수 (API 키 노출 방지)
+.env
+
+# 추출 이미지 (용량 폭증 방지)
+**/figures/
+*.pdf
+
+# 벡터 DB
+chroma_db/
+
+# 파이썬
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+
+# 에디터
+.vscode/
+.idea/
+.DS_Store
+
+# bkit (플러그인 로그·상태)
+.bkit/
+
+# 피클 (추출·요약 캐시)
+*.pkl
+
+# VS Code Code Runner 임시 파일
+tempCodeRunnerFile.*
