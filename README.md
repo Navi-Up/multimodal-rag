@@ -59,10 +59,7 @@ multimodal-rag/
 ├── requirements.lock.txt   # 동작 확인한 버전 고정
 ├── data/                   # 원본 PDF·추출 결과 (Git 제외)
 ├── notebooks/
-│   ├── Multi_modal_RAG.ipynb             # 설치 검증 + 데이터 추출
-│   ├── 01_데이터추출_*.ipynb             # ① 파싱 연습
-│   ├── 02_요약생성_학습.ipynb            # 텍스트·표·이미지 요약
-│   └── 03_임베딩_최종체인_연습.ipynb     # 검색기·최종 체인·Before/After
+│   └── Multi_modal_RAG.ipynb             # 설치 검증 + 데이터 추출
 └── src/
     ├── extract.py          # PDF 파싱·분류·청크 분할
     ├── summarize.py        # 텍스트·표·이미지 요약
